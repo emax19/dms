@@ -1,0 +1,12 @@
+eureka:
+  instance:
+    preferIpAddress: true
+logging:
+  level:
+    root: INFO
+    feign: INFO
+feign:
+  client:
+    config:
+      default:
+        logger-level: full

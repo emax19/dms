@@ -1,0 +1,13 @@
+server:
+  port: 8892
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: password
+      scope: read,write
+      auto-approve-scopes: '.*'
+
+logging:
+  level.org.springframework.security: DEBUG
