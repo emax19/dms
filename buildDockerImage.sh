@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-modules=( config-service discovery-service )
+modules=( config-service discovery-service gateway-service )
 
 for module in "${modules[@]}"; do
     docker build -t "dms/${module}:latest" ${module}

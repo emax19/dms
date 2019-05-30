@@ -1,6 +1,8 @@
 config-service:
   image:  dms/config-service
   hostname: config-service
+  ports:
+    - "8100:8100"
   volumes:
     - ./config-service/config:/app/config
 discovery-service:
@@ -9,6 +11,14 @@ discovery-service:
     - "8761:8761"
   links:
     - "config-service"
+
+gateway-service:
+  image:  dms/gateway-service
+  ports:
+    - "8762:8762"
+  links:
+    - "config-service"
+    - "discovery-service"
 
 #service-b:
 #  image:  spring-cloud-netflix-example/service-b

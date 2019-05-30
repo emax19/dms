@@ -4,4 +4,11 @@ spring:
   cloud:
     config:
       fail-fast: true
-      uri: http://localhost:8100/
+      uri: http://locahost:8100/
+---
+spring:
+  profiles: docker
+  cloud:
+    config:
+      fail-fast: true
+      uri: http://config-service:8100/
