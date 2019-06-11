@@ -16,6 +16,7 @@
 		<module>discovery-service</module>
 		<module>gateway-service</module>
 		<module>management-service</module>
+		<module>admin-ui</module>
 	</modules>
 
 	<parent>

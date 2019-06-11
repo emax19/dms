@@ -1,0 +1,2 @@
+spring.thymeleaf.cache: false
+kibana.host: http://localhost:5601
