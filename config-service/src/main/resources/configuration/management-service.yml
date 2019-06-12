@@ -1,7 +1,16 @@
 server:
   port: 8891
+  servlet.context-path: /management
 
 eureka:
   client:
     register-with-eureka: true
     fetch-registry: false
+
+spring:
+  elasticsearch:
+    rest:
+      uris: ${ELASTIC_REST:localhost:9200}
+  data.elasticsearch:
+    cluster-name: ${ELASTIC_CLUSTER:elasticsearch}
+    cluster-nodes: ${ELASTIC_NODES:localhost:9300}

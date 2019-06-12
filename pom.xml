@@ -10,7 +10,6 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>persistence</module>
 		<module>config-service</module>
 		<module>oauth-service</module>
 		<module>discovery-service</module>

@@ -1,0 +1,36 @@
+{
+  "index_patterns": "dms_device_*",
+  "settings": {
+    "index": {
+      "number_of_shards": "1",
+      "number_of_replicas": "0"
+    }
+  },
+  "mappings": {
+    "_doc": {
+      "properties": {
+        "id": {
+          "type": "keyword"
+        },
+        "name": {
+          "type": "text"
+        },
+        "deviceType": {
+          "type": "nested",
+          "properties": {
+            "id": {
+              "type": "keyword"
+            },
+            "name": {
+              "type": "text"
+            }
+          }
+        },
+        "token": {
+          "index": "true",
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}
