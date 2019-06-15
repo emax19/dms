@@ -1,5 +1,5 @@
 {
-  "index_patterns": "dms_device_*",
+  "index_patterns": "dms_device",
   "settings": {
     "index": {
       "number_of_shards": "1",
@@ -13,22 +13,23 @@
           "type": "keyword"
         },
         "name": {
+          "type": "keyword"
+        },
+        "location": {
           "type": "text"
         },
+        "host": {
+          "type": "keyword"
+        },
         "deviceType": {
-          "type": "nested",
-          "properties": {
-            "id": {
-              "type": "keyword"
-            },
-            "name": {
-              "type": "text"
-            }
-          }
+          "type": "keyword"
         },
         "token": {
-          "index": "true",
           "type": "keyword"
+        },
+        "lastActivity": {
+          "type": "date",
+          "format": "strict_date_time_no_millis"
         }
       }
     }

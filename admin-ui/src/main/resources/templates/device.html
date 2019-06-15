@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/default"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout/default">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Device management</title>
 </head>
@@ -21,10 +21,16 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Devices</h6>
+                <a class="btn btn-success btn-icon-split" th:href="@{/device/create}">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-arrow-right"></i>
+                    </span>
+                    <span class="text">New Device</span>
+                </a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table cellspacing="0" class="table table-bordered" id="dataTable" width="100%">
                         <thead>
                         <tr>
                             <th>Name</th>
@@ -34,28 +40,15 @@
                             <th></th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Location</th>
-                            <th>Type</th>
-                            <th>Last activity</th>
-                            <th></th>
-                        </tr>
-                        </tfoot>
                         <tbody>
-                        <tr th:each="device, iStat : ${devices}">
+                        <tr th:each="device, iStat : ${deviceList}">
                             <td th:text="${device.name}"/>
-                            <td th:text="location"/>
-                            <td th:text="${device.type.name}"/>
-                            <td>2019/06/11 16:00:00</td>
+                            <td th:text="${device.location}"/>
+                            <td th:text="${device.type}"/>
+                            <td th:text="${device.lastActivity}"/>
                             <td>
-                                <a href="manage.html" class="btn btn-info btn-circle btn-sm">
+                                <a class="btn btn-info btn-circle btn-sm" th:href="@{/device/{id}(id = ${device.id})}">
                                     <i class="fas fa-info-circle"></i>
-                                </a>
-                                <a href="#" class="btn btn-danger btn-circle btn-sm" id="navbarDropdown2" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-trash"></i>
                                 </a>
                             </td>
                         </tr>

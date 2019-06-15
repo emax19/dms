@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorator="layout/default"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Device management</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+
+                <!-- Basic Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Main Information</h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" th:action="@{/device/save}">
+                            <input name="id" th:value="${device?.id}" type="hidden">
+                            <div class="form-group">
+                                <label>Name:</label>
+                                <input class="form-control" name="name" th:value="${device?.name}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Location:</label>
+                                <input class="form-control" name="location" th:value="${device?.location}" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Host:</label>
+                                <input class="form-control" name="host" placeholder="localhost:1234" th:value="${device?.host}"
+                                       type="text">
+                            </div>
+                            <div class="form-group">
+                                <label>Type:</label>
+                                <input class="form-control" list="deviceTypeList" name="type" th:value="${device?.type}"
+                                       type="text">
+                                <datalist id="deviceTypeList">
+                                    <option th:each="type, iStat : ${deviceTypeList}"
+                                            th:selected="${type == device?.type}"
+                                            th:text="${type}"
+                                            th:value="${type}"/>
+                                </datalist>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    <span class="text">  Save   </span>
+                                </button>
+                                <span class="icon text-white-50">
+                                      <i class="fas fa-check"></i>
+                                    </span>
+
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="card shadow mb-4" th:if="${device != null}">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Metrics</h6>
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-success btn-icon-split" href="#">
+                                    <span class="icon">
+                                        Last activity: </span>
+                            <span class="text" th:text="${device?.lastActivity}"></span>
+                        </a>
+                        <div class="my-2"></div>
+                        <a class="btn btn-info btn-icon-split" href="#">
+                                    <span class="icon text-white-50">
+                                      <i class="fas fa-info-circle"></i>
+                                    </span>
+                            <span class="text">Look metrics on Kibana</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card mb-4" th:if="${device != null}">
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold text-primary">Actions</h6>
+                    </div>
+                    <div class="card-body py-3">
+                        <a aria-controls="newActionForm" aria-expanded="false" class="d-block card-header py-3 collapsed"
+                           data-toggle="collapse" href="#newActionForm" role="button">
+                            <h6 class="m-0 font-weight-bold text-success">New Action</h6>
+                        </a>
+                        <div class="collapse" id="newActionForm">
+                            <div class="card-body">
+                                <form method="POST" th:action="@{/device/{id}/action (id = ${device.id})}">
+                                    <input name="id" th:value="${device?.id}" type="hidden">
+                                    <div class="form-group">
+                                        <label>Name:</label>
+                                        <input class="form-control" name="name" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Method:</label>
+                                        <select class="form-control" name="method">
+                                            <option>GET</option>
+                                            <option>POST</option>
+                                            <option>PUT</option>
+                                            <option>PATCH</option>
+                                            <option>DELETE</option>
+                                            <option>HEAD</option>
+                                            <option>OPTIONS</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>relativePath:</label>
+                                        <input class="form-control" name="relativeUrl" type="text">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                            <span class="text">  Add action   </span>
+                                        </button>
+                                        <span class="icon text-white-50">
+                                      <i class="fas fa-check"></i>
+                                    </span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" th:each="action, iStat : ${device.actions}">
+
+                        <a aria-expanded="false" class="d-block card-header py-3 collapsed"
+                           data-toggle="collapse"
+                           role="button" th:aria-controls="${action.name.replace(' ','_')}" th:href="${'#'+action.name.replace(' ','_')}">
+                            <h6 class="m-0 font-weight-bold text-primary" th:text="${action.name}"></h6>
+                        </a>
+                        <div class="collapse" th:id="${action.name.replace(' ','_')}">
+                            <div class="card-body">
+                                <button class="btn btn-primary click-button"
+                                        th:data-id="${device.id}"
+                                        th:data-method="${action.method}"
+                                        th:data-url="${action.relativeUrl}"
+                                        th:id="${action.name}">
+                                    <strong th:text="${action.method}"></strong>
+                                    <span th:text="${action.relativeUrl}"></span>
+                                </button>
+                                <form method="POST" th:action="@{/device/{id}/action/remove (id = ${device.id})}">
+                                    <input name="relativeUrl" th:value="${action.relativeUrl}" type="hidden">
+                                    <input name="method" th:value="${action.method}" type="hidden">
+                                    <button class="btn btn-danger btn-circle">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="my-2"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+</div>
+<script th:src="@{/js/main.js}"></script>
+</body>
+
+</html>

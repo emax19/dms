@@ -1,6 +1,5 @@
 server:
   port: 8891
-  servlet.context-path: /management
 
 eureka:
   client:
