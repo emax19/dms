@@ -1,0 +1,4 @@
+server:
+  port: ${SERVER_PORT:8090}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:}

@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:8101}
+  port: ${SERVER_PORT:8761}
   servlet:
     context-path: ${SERVER_CONTEXT_PATH:}
 eureka:

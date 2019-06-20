@@ -14,31 +14,32 @@ import java.util.List;
 @ToString
 public class Device {
 
-	@Field
-	private String id;
+    @Field
+    private String id;
 
-	@Field
-	private String name;
+    @Field
+    private String name;
 
-	@Field
-	private String location;
+    @Field
+    private String location;
 
-	@Field
-	private String host;
+    @Field
+    private String host;
 
-	@Field
-	private String lastActivity;
+    @Field
+    private String lastActivity;
 
-	@Field
-	private String type;
+    @Field
+    private String type;
 
-	@Field
-	private List<Action> actions;
+    @Field
+    private List<Action> actions;
 
-//	@Field
-//	private GeoPoint geoPoint;
+    @Field
+    private String token;
 
-	@Field
-	private String token;
+    public Device(String id) {
+        this.id = id;
+    }
 
 }

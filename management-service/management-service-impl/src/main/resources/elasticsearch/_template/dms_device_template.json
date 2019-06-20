@@ -21,7 +21,7 @@
         "host": {
           "type": "keyword"
         },
-        "deviceType": {
+        "type": {
           "type": "keyword"
         },
         "token": {

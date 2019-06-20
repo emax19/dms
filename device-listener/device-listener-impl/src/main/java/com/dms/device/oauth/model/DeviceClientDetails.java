@@ -1,80 +1,41 @@
 package com.dms.device.oauth.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+@Getter
 public class DeviceClientDetails implements ClientDetails {
 
+    @Setter
+    private String clientId;
+    @Setter
+    private String clientSecret;
 
-	@Override
-	public String getClientId() {
-		return "dclient";
-	}
+    private Integer accessTokenValiditySeconds = 3600;
+    private Integer refreshTokenValiditySeconds = 3600;
+    private boolean scoped = true;
+    private boolean secretRequired = true;
+    private Set<String> scope = Collections.singleton("log");
+    private Set<String> resourceIds = Collections.singleton("device_listener");
+    private Set<String> authorizedGrantTypes = Collections.singleton("client_credentials");
+    private Collection<GrantedAuthority> authorities = Collections.singleton(() -> "device");
+    private Set<String> registeredRedirectUri;
+    private Map<String, Object> additionalInformation;
 
-	@Override
-	public Set<String> getResourceIds() {
-		return Collections.singleton("resource");
-	}
+    public DeviceClientDetails(String clientId, String clientSecret) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+    }
 
-	@Override
-	public boolean isSecretRequired() {
-		return true;
-	}
-
-	@Override
-	public String getClientSecret() {
-		return "asd";
-	}
-
-	@Override
-	public boolean isScoped() {
-		return true;
-	}
-
-	@Override
-	public Set<String> getScope() {
-		return Collections.singleton("read");
-	}
-
-	@Override
-	public Set<String> getAuthorizedGrantTypes() {
-		return new HashSet<>(Arrays.asList("client_credentials"));
-	}
-
-	@Override
-	public Set<String> getRegisteredRedirectUri() {
-		return null;
-	}
-
-	@Override
-	public Collection<GrantedAuthority> getAuthorities() {
-		return Collections.singleton(() -> "some_role");
-	}
-
-	@Override
-	public Integer getAccessTokenValiditySeconds() {
-		return 60;
-	}
-
-	@Override
-	public Integer getRefreshTokenValiditySeconds() {
-		return 60;
-	}
-
-	@Override
-	public boolean isAutoApprove(String s) {
-		return false;
-	}
-
-	@Override
-	public Map<String, Object> getAdditionalInformation() {
-		return null;
-	}
+    @Override
+    public boolean isAutoApprove(String s) {
+        return false;
+    }
 }

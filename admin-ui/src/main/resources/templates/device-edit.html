@@ -31,7 +31,8 @@
                             </div>
                             <div class="form-group">
                                 <label>Host:</label>
-                                <input class="form-control" name="host" placeholder="localhost:1234" th:value="${device?.host}"
+                                <input class="form-control" name="host" placeholder="localhost:1234"
+                                       th:value="${device?.host}"
                                        type="text">
                             </div>
                             <div class="form-group">
@@ -85,13 +86,32 @@
                         </a>
                     </div>
                 </div>
+                <div class="card shadow mb-4" th:if="${device != null}">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Security</h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" th:action="@{/device/{id}/generate-token (id = ${device.id})}">
+                            <button class="btn btn-success btn-icon-split">
+                                <span class="text">Generate secret</span>
+                            </button>
+                        </form>
+                        <div class="my-2"></div>
+                        <span class="text">Client id:   </span>
+                        <span class="text" th:text="${device.id}"></span>
+                        <div class="my-2"></div>
+                        <span class="text">Secret:      </span>
+                        <span class="text" th:text="${device.token}"></span>
+                    </div>
+                </div>
 
                 <div class="card mb-4" th:if="${device != null}">
                     <div class="card-header">
                         <h6 class="m-0 font-weight-bold text-primary">Actions</h6>
                     </div>
                     <div class="card-body py-3">
-                        <a aria-controls="newActionForm" aria-expanded="false" class="d-block card-header py-3 collapsed"
+                        <a aria-controls="newActionForm" aria-expanded="false"
+                           class="d-block card-header py-3 collapsed"
                            data-toggle="collapse" href="#newActionForm" role="button">
                             <h6 class="m-0 font-weight-bold text-success">New Action</h6>
                         </a>
@@ -138,7 +158,8 @@
 
                         <a aria-expanded="false" class="d-block card-header py-3 collapsed"
                            data-toggle="collapse"
-                           role="button" th:aria-controls="${action.name.replace(' ','_')}" th:href="${'#'+action.name.replace(' ','_')}">
+                           role="button" th:aria-controls="${action.name.replace(' ','_')}"
+                           th:href="${'#'+action.name.replace(' ','_')}">
                             <h6 class="m-0 font-weight-bold text-primary" th:text="${action.name}"></h6>
                         </a>
                         <div class="collapse" th:id="${action.name.replace(' ','_')}">
