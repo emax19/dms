@@ -1,5 +1,7 @@
 server:
-  port: 8892
+  port: ${SERVER_PORT:8083}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:}
 
 security:
   oauth2:

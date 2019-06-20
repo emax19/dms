@@ -1,5 +1,7 @@
 server:
-  port: 8762
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:}
 
 zuul:
   sensitiveHeaders:

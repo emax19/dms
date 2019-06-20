@@ -1,0 +1,19 @@
+server.port: 8200
+oauth-properties:
+  client-id: dclient
+  secret: asd
+  grant-type: client_credentials
+  access-token-endpoint: http://localhost:8080/oauth/token
+states:
+  enabled:
+    param1: 100
+    param2: 200
+    param3: 35
+    status:
+      d1: UP
+      d2: UP
+  disabled:
+    param1: 10
+    param2: 20
+    param3: 5
+    status: DOWN

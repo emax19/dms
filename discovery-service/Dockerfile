@@ -7,5 +7,5 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 RUN mkdir /app
 WORKDIR /app
 COPY target/discovery-service-1.0-SNAPSHOT-application.jar /app
-ENTRYPOINT ["dockerize", "-timeout", "5m", "-wait", "tcp://config-service:8100", "java", "-jar", "/app/discovery-service-1.0-SNAPSHOT-application.jar",  "--spring.profiles.active=docker"]
+ENTRYPOINT ["dockerize", "-timeout", "5m", "-wait", "tcp://config-service:8100", "java", "-jar", "/app/discovery-service-1.0-SNAPSHOT-application.jar",  "--spring.profiles.active=docker_discovery"]
 EXPOSE 8761
