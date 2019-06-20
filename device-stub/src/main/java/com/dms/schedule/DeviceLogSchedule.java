@@ -12,19 +12,19 @@ import java.util.concurrent.atomic.AtomicReference;
 //@Component
 public class DeviceLogSchedule {
 
-	@Getter
-	private AtomicReference<Object> state;
-	private RestTemplate restTemplate;
+    @Getter
+    private AtomicReference<Object> state;
+    private RestTemplate restTemplate;
 
-	public DeviceLogSchedule(StateProperties stateProperties, RestTemplate restTemplate) {
-		this.state = new AtomicReference<>(stateProperties.getStates().get("enabled"));
-		this.restTemplate = restTemplate;
-	}
+    public DeviceLogSchedule(StateProperties stateProperties, RestTemplate restTemplate) {
+        this.state = new AtomicReference<>(stateProperties.getStates().get("enabled"));
+        this.restTemplate = restTemplate;
+    }
 
-	@Scheduled(fixedRate = 5000)
-	public void logState() {
+    @Scheduled(fixedRate = 5000)
+    public void logState() {
 //		restTemplate.postForEntity()
-		log.info("The state was logged - " + state.get());
-	}
+        log.info("The state was logged - " + state.get());
+    }
 
 }

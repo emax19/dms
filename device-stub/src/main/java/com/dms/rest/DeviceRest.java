@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 //@AllArgsConstructor
 public class DeviceRest {
 
-	private StateProperties stateProperties;
-	private DeviceLogSchedule deviceLogSchedule;
+    private StateProperties stateProperties;
+    private DeviceLogSchedule deviceLogSchedule;
 
-	@PostMapping("enable")
-	public ResponseEntity enable() {
-		deviceLogSchedule.getState().set(stateProperties.getStates().get("enabled"));
-		log.info("device was enabled");
-		return ResponseEntity.ok().build();
-	}
+    @PostMapping("enable")
+    public ResponseEntity enable() {
+        deviceLogSchedule.getState().set(stateProperties.getStates().get("enabled"));
+        log.info("device was enabled");
+        return ResponseEntity.ok().build();
+    }
 
-	@PostMapping("disable")
-	public ResponseEntity disable() {
-		deviceLogSchedule.getState().set(stateProperties.getStates().get("disabled"));
-		log.info("device was disabled");
-		return ResponseEntity.ok().build();
-	}
+    @PostMapping("disable")
+    public ResponseEntity disable() {
+        deviceLogSchedule.getState().set(stateProperties.getStates().get("disabled"));
+        log.info("device was disabled");
+        return ResponseEntity.ok().build();
+    }
 
 }

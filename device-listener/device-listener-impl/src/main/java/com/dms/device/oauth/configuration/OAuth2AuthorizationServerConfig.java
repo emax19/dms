@@ -22,21 +22,21 @@ import java.util.Collections;
 @EnableAuthorizationServer
 public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	private TokenStore tokenStore;
-	private JwtAccessTokenConverter accessTokenConverter;
-	private DeviceClientDetailsService clientDetailsService;
+    private TokenStore tokenStore;
+    private JwtAccessTokenConverter accessTokenConverter;
+    private DeviceClientDetailsService clientDetailsService;
 
-	@Override
-	public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-		final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-		tokenEnhancerChain.setTokenEnhancers(Collections.singletonList(accessTokenConverter));
-		endpoints.tokenStore(tokenStore)
-				.tokenEnhancer(tokenEnhancerChain);
-	}
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        tokenEnhancerChain.setTokenEnhancers(Collections.singletonList(accessTokenConverter));
+        endpoints.tokenStore(tokenStore)
+                .tokenEnhancer(tokenEnhancerChain);
+    }
 
-	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.withClientDetails(clientDetailsService);
-	}
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.withClientDetails(clientDetailsService);
+    }
 
 }

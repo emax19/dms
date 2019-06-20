@@ -7,6 +7,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class RefreshTokenDto {
 
-	private String refreshToken;
+    private String refreshToken;
 
 }

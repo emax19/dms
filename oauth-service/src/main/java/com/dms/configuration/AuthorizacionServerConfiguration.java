@@ -64,14 +64,14 @@ public class AuthorizacionServerConfiguration extends AuthorizationServerConfigu
         return new BCryptPasswordEncoder();
     }
 
-	@Configuration
-	public class AuthenticationMananagerProvider extends WebSecurityConfigurerAdapter {
+    @Configuration
+    public class AuthenticationMananagerProvider extends WebSecurityConfigurerAdapter {
 
-		@Bean
-		@Override
-		public AuthenticationManager authenticationManagerBean() throws Exception {
-			return super.authenticationManagerBean();
-		}
+        @Bean
+        @Override
+        public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
+        }
 
-	}
+    }
 }

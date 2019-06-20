@@ -11,8 +11,8 @@ import java.util.Map;
 @ConfigurationProperties
 public class StateProperties {
 
-	@Getter
-	@Setter
-	private Map<String, Object> states;
+    @Getter
+    @Setter
+    private Map<String, Object> states;
 
 }

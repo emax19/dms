@@ -13,11 +13,11 @@ import javax.annotation.PostConstruct;
 @EnableElasticsearchRepositories
 public class ElasticConfig {
 
-	private RestClient restClient;
+    private RestClient restClient;
 
-	@PostConstruct
-	public void indexMigration() throws Exception {
-		ElasticsearchBeyonder.start(restClient);
-	}
+    @PostConstruct
+    public void indexMigration() throws Exception {
+        ElasticsearchBeyonder.start(restClient);
+    }
 
 }
