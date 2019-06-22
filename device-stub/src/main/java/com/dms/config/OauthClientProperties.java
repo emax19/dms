@@ -15,5 +15,6 @@ public class OauthClientProperties {
     private String secret;
     private String grantType;
     private String accessTokenEndpoint;
+    private String logEndpoint;
 
 }

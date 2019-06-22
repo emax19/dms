@@ -25,7 +25,7 @@ public interface DeviceApi {
     @PostMapping("/device/{id}/action")
     void addAction(@PathVariable String id, @RequestBody Action action);
 
-    @DeleteMapping("/device/{id}/action/{name}/{method}")
-    void removeAction(@PathVariable String id, @PathVariable String name, @PathVariable String method);
+    @PostMapping("/device/{id}/action/remove")
+    void removeAction(@PathVariable String id, @RequestBody Action action);
 
 }

@@ -22,10 +22,10 @@ public class RestTemplateConfig {
     @Bean
     public OAuth2RestTemplate oauth2RestTemplate(OauthClientProperties oauthClientProperties) {
         ClientCredentialsResourceDetails resource = new ClientCredentialsResourceDetails();
-        resource.setClientId("dclient");
-        resource.setClientSecret("asd");
-        resource.setGrantType("client_credentials");
-        resource.setAccessTokenUri("http://localhost:8080/oauth/token");
+        resource.setClientId(oauthClientProperties.getClientId());
+        resource.setClientSecret(oauthClientProperties.getSecret());
+        resource.setGrantType(oauthClientProperties.getGrantType());
+        resource.setAccessTokenUri(oauthClientProperties.getAccessTokenEndpoint());
 
         DefaultAccessTokenRequest atr = new DefaultAccessTokenRequest();
         DefaultOAuth2ClientContext context = new DefaultOAuth2ClientContext(atr);

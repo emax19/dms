@@ -1,8 +1,5 @@
-networks:
-  docker-elk:
-    driver: bridge
 elasticsearch:
-  image: docker.elastic.co/elasticsearch/elasticsearch:7.1.0
+  image: docker.elastic.co/elasticsearch/elasticsearch:6.8.1
   hostname: elasticsearch
   environment:
     - discovery.type=single-node
@@ -26,20 +23,21 @@ discovery-service:
 gateway-service:
   image:  dms/gateway-service
   ports:
-    - "8762:8762"
+    - "8080:8080"
   links:
     - "config-service"
     - "discovery-service"
 management-service:
   image:  dms/management-service
-  environment:
-    - SERVER_PORT = 8891
+#  environment:
+  #  - SERVER_PORT = 8891
     #    - ELASTIC_REST = elasticsearch:9200
-    - ELASTIC_CLUSTER = docker-cluster
+   # - ELASTIC_CLUSTER = docker-cluster#
   #    - ELASTIC_NODES = elasticsearch:9300
   ports:
-    - "8891:8891"
+    - "8082:8082"
   links:
+    - "elasticsearch"
     - "config-service"
     - "discovery-service"
 

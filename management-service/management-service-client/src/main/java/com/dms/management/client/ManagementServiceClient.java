@@ -2,6 +2,7 @@ package com.dms.management.client;
 
 import com.dms.management.model.Action;
 import com.dms.management.model.Device;
+import com.dms.management.model.DeviceLog;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,10 @@ public interface ManagementServiceClient {
     @PostMapping("/device/{id}/action")
     void addAction(@PathVariable String id, @RequestBody Action action);
 
-    @DeleteMapping("/device/{id}/action/{method}/{name}")
-    void removeAction(@PathVariable String id, @PathVariable String method, @PathVariable String name);
+    @PostMapping("/device/{id}/action/remove")
+    void removeAction(@PathVariable String id, @RequestBody Action action);
+
+    @PostMapping("/device-log")
+    boolean log(@RequestBody DeviceLog log);
 
 }

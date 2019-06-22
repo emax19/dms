@@ -18,6 +18,8 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilde
 import org.springframework.web.bind.annotation.RestController;
 
 import java.beans.FeatureDescriptor;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -73,9 +75,10 @@ public class DeviceRest implements DeviceApi {
     }
 
     @Override
-    public void removeAction(String id, String name, String method) {
+    public void removeAction(String id, Action actionToRemove) {
         deviceRepository.findById(id).ifPresent(device -> {
-            device.getActions().removeIf(action -> Objects.equals(action.getName(), name) && Objects.equals(action.getMethod(), method));
+            device.getActions().removeIf(action -> Objects.equals(action.getRelativeUrl(), actionToRemove.getRelativeUrl())
+                    && Objects.equals(action.getMethod(), actionToRemove.getMethod()));
             deviceRepository.save(device);
         });
     }
@@ -98,6 +101,10 @@ public class DeviceRest implements DeviceApi {
                 .map(FeatureDescriptor::getName)
                 .filter(propertyName -> wrappedSource.getPropertyValue(propertyName) == null)
                 .toArray(String[]::new);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(ZonedDateTime.now(ZoneOffset.UTC));
     }
 
 }

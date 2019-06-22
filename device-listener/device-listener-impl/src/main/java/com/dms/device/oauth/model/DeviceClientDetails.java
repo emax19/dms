@@ -23,7 +23,7 @@ public class DeviceClientDetails implements ClientDetails {
     private boolean scoped = true;
     private boolean secretRequired = true;
     private Set<String> scope = Collections.singleton("log");
-    private Set<String> resourceIds = Collections.singleton("device_listener");
+    private Set<String> resourceIds = Collections.singleton("oauth2-resource");
     private Set<String> authorizedGrantTypes = Collections.singleton("client_credentials");
     private Collection<GrantedAuthority> authorities = Collections.singleton(() -> "device");
     private Set<String> registeredRedirectUri;
